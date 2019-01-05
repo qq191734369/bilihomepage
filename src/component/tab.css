@@ -1,0 +1,14 @@
+.tab-item{
+  display: inline-block;
+  cursor: pointer;
+}
+.tab-item.active{
+  color: #00a1d6;
+}
+
+.tab-content{
+  display: none;
+}
+.tab-content.active{
+  display: block;
+}

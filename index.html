@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>惊了</title>
+  <link rel="stylesheet" href="./src/css/normalize.css">
+  <link rel="stylesheet" href="./src/css/index.css">
+  <link rel="stylesheet" href="./src/component/tab.css">
+  <link rel="stylesheet" href="./src/component/casousel.css">
+  <style>
+  body, html {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: 0;
+		padding: 0;
+	}
+	#background {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: -100;
+  }
+  </style>
+</head>
+<body>
+  <canvas id="background"></canvas>
+  <section id="login-dialog">
+    <div class="mask"></div>
+    <div class="dialog-container">
+      <div>
+        <label class="login-form-item" for="username" >用户名</label>
+        <input class="login-form-item" type="text" name="username" id="username">
+        <div class="username-veri error verify">用户名为6-12位非空格字符</div>
+        <label class="login-form-item" for="password" >密码</label>
+        <input class="login-form-item" type="password" name="password" id="password">
+        <div class="password-veri error verify">密码为6-12位字母加数字</div>
+        <button class="login-btn" id="login-btn" onclick='onLogin()'>登陆</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="top-nav clearfix">
+    <div class="nav-bg clearfix">
+      <div class="login">
+        <img class="avatar" src="./src/img/avatar.jpg" alt="">
+        <div class="no-login">
+          <div class="des">登陆以后你可以：</div>
+          <div class="img">
+            <img src="./src/img/danmu1.png" alt="">
+            <img src="./src/img/danmu1.png" alt="">
+          </div>
+          <a href="#" class="login-btn">登陆</a>
+        </div>
+        <div class="already-login">
+          <p class="display-usrname">已登陆状态</p>
+          <ul class="usr-list">
+            <li class="usr-zoom">个人中心</li>
+            <li class="usr-zoom">投稿管理</li>
+            <li class="usr-zoom">钱包</li>
+            <li class="usr-zoom">直播中心</li>
+            <li class="usr-zoom">我的订单</li>
+            <div class="logout" onclick="logOut()">退出登录</div>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <ul class="nav-container">
+      <li class="nav-item"><a href="#">主页</a></li>
+      <li class="nav-item"><a href="#">惊了</a></li>
+      <li class="nav-item"><a href="#">关于</a></li>
+    </ul>
+  </section>
+  <section class="top-bg">
+    <div class="container">
+      <div class="search">
+        <input type="text" id="search-input">
+        <button class="search-submit"></button>
+        <ul class="history" id="history">
+          <li>搜索历史</li>
+          <li>可用localstorage实现</li>
+          <li>可用localstorage实现</li>
+          <li>可用localstorage实现</li>
+          <li>可用localstorage实现</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- side nav -->
+  <section class="side-nav" id="scroll-nav">
+    <ul class="container">
+      <li class="side-nav-item" data-to="#hot">热门</li>
+      <li class="side-nav-item" data-to="#promote">推广</li>
+      <li class="side-nav-item" data-to="#animate">动画</li>
+      <li class="side-nav-item" data-to="#fanju">番剧</li>
+      <li class="side-nav-item" data-to="#guochuang">国创</li>
+      <li class="side-nav-item" data-to="#music">音乐</li>
+      <li class="side-nav-item" data-to="#dance">舞蹈</li>
+      <li class="side-nav-item" data-to="#game">游戏</li>
+      <li class="side-nav-item" data-to="#technology">科技</li>
+      <li class="side-nav-item" data-to="#life">生活</li>
+      <li class="side-nav-item" data-to="#guichu">鬼畜</li>
+      <li class="side-nav-item" data-to="#show">时尚</li>
+    </ul>
+  </section>
+
+  <section class="page-container">
+    <!-- 导航菜单 -->
+    <div class="menu">
+      <ul class="content">
+        <li class="menu-item">
+          <div class="notic">999+</div>
+          <a href="#">首页</a>
+        </li>
+       
+        <li class="menu-item">
+          <div class="notic">234</div>
+          <a href="#">动画</a>
+          <ul class="drop">
+            <li class="drop-item">MAD-AWV</li>
+            <li class="drop-item">MMD-3D</li>
+            <li class="drop-item">短书·手书·配音</li>
+            <li class="drop-item">综合</li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <div class="notic">150</div>
+          <a href="#">番剧</a>
+          <ul class="drop">
+            <li class="drop-item">连载动画</li>
+            <li class="drop-item">完结动画</li>
+            <li class="drop-item">咨询</li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <div class="notic">756</div>
+          <a href="#">国创</a>
+          <ul class="drop">
+            <li class="drop-item">国产动画</li>
+            <li class="drop-item">国产原创相关</li>
+            <li class="drop-item">布袋戏</li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <div class="notic">345</div>
+          <a href="#">音乐</a>
+          <ul class="drop">
+            <li class="drop-item">音频</li>
+            <li class="drop-item">原创音乐</li>
+            <li class="drop-item">翻唱</li>
+            <li class="drop-item">三次元音乐</li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <div class="notic">876</div>
+          <a href="#">舞蹈</a>
+          <ul class="drop">
+            <li class="drop-item">宅舞</li>
+            <li class="drop-item">三次元舞蹈</li>
+            <li class="drop-item">舞蹈教程</li>
+          </ul>
+        </li>
+        <li class="menu-item">
+          <div class="notic">345</div>
+          <a href="#">游戏</a>
+          <ul class="drop">
+            <li class="drop-item">单机游戏</li>
+            <li class="drop-item">电子竞技</li>
+            <li class="drop-item">手机游戏</li>
+            <li class="drop-item">网络游戏</li>
+            <li class="drop-item">桌游棋牌</li>
+            <li class="drop-item">GMV</li>
+            <li class="drop-item">音游</li>
+            <li class="drop-item">游戏赛事</li>
+          </ul>
+        </li>
+        <li class="menu-item">
+            <div class="notic">999+</div>
+            <a href="#">科技</a>
+            <ul class="drop">
+              <li class="drop-item">趣味科普人文</li>
+              <li class="drop-item">野生技术协会</li>
+              <li class="drop-item">演讲·公开课</li>
+              <li class="drop-item">星海</li>
+              <li class="drop-item">数码</li>
+              <li class="drop-item">机械</li>
+              <li class="drop-item">汽车</li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <div class="notic">289</div>
+            <a href="#">生活</a>
+            <ul class="drop">
+              <li class="drop-item">搞笑</li>
+              <li class="drop-item">日常</li>
+              <li class="drop-item">美食圈</li>
+              <li class="drop-item">动物圈</li>
+              <li class="drop-item">手工</li>
+              <li class="drop-item">绘图</li>
+              <li class="drop-item">运动</li>
+              <li class="drop-item">其他</li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <div class="notic">893</div>
+            <a href="#">鬼畜</a>
+            <ul class="drop">
+              <li class="drop-item">鬼畜调教</li>
+              <li class="drop-item">音MAD</li>
+              <li class="drop-item">教程演示</li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <div class="notic">100</div>
+            <a href="#">时尚</a>
+            <ul class="drop">
+              <li class="drop-item">美妆</li>
+              <li class="drop-item">服饰</li>
+              <li class="drop-item">健身</li>
+              <li class="drop-item">资讯</li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <div class="notic">999+</div>
+            <a href="#">娱乐</a>
+            <ul class="drop">
+              <li class="drop-item">综艺</li>
+              <li class="drop-item">明星</li>
+              <li class="drop-item">Korea相关</li>
+            </ul>
+          </li>
+          <li class="menu-item">
+            <div class="notic">100</div>
+            <a href="#">影视</a>
+            <ul class="drop">
+              <li class="drop-item">影视杂谈</li>
+              <li class="drop-item">影视剪辑</li>
+              <li class="drop-item">短片</li>
+              <li class="drop-item">特摄</li>
+            </ul>
+          </li>
+           <li class="menu-item">
+         	 <div class="notic">123</div>
+         	 <a href="#">广告</a>
+        	  <ul class="drop">
+        	  </ul>
+      	  </li>
+          <li class="menu-item">
+            <img src="./src/img/get-car.gif" alt="" srcset="">
+          </li>
+      </ul>
+    </div>
+
+    <!-- 上方轮播section -->
+    <div class="hot clearfix scroll-content" id="hot">
+      <!-- hot 开始 -->
+      <div class="carourel">
+        <div class="content">
+          <div class='parent'>
+                <div class='slider'>
+                    <button type="button" id='right' class='right' name="button">
+            
+                   <svg version="1.1" id="Capa_1" width='40px' height='40px ' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
+                   <g>
+                    <path style='fill: #9d9d9d;' d="M360.731,229.075l-225.1-225.1c-5.3-5.3-13.8-5.3-19.1,0s-5.3,13.8,0,19.1l215.5,215.5l-215.5,215.5
+                      c-5.3,5.3-5.3,13.8,0,19.1c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-4l225.1-225.1C365.931,242.875,365.931,234.275,360.731,229.075z
+                      ">
+                   </g>
+            
+                   </svg>
+            
+                   </button>
+                    <button type="button" id='left' class='left' name="button">
+                   <svg version="1.1" id="Capa_2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                     viewBox="0 0 477.175 477.175" style="enable-background:new 0 0 477.175 477.175;" xml:space="preserve">
+                   <g>
+                    <path style='fill: #9d9d9d;' d="M145.188,238.575l215.5-215.5c5.3-5.3,5.3-13.8,0-19.1s-13.8-5.3-19.1,0l-225.1,225.1c-5.3,5.3-5.3,13.8,0,19.1l225.1,225
+                      c2.6,2.6,6.1,4,9.5,4s6.9-1.3,9.5-4c5.3-5.3,5.3-13.8,0-19.1L145.188,238.575z">
+                   </g>
+                   </svg>
+                   </button>
+                    <svg id='svg2' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <circle id='circle1' class='circle1 steap' cx="34px" cy="49%" r="20"  />
+                  <circle id='circle2' class='circle2 steap' cx="34px" cy="49%" r="100"  />
+                  <circle id='circle3' class='circle3 steap' cx="34px" cy="49%" r="180"  />
+                  <circle id='circle4' class='circle4 steap' cx="34px" cy="49%" r="260"  />
+                  <circle id='circle5' class='circle5 steap' cx="34px" cy="49%" r="340"  />
+                  <circle id='circle6' class='circle6 steap' cx="34px" cy="49%" r="420"  />
+                  <circle id='circle7' class='circle7 steap' cx="34px" cy="49%" r="500"  />
+                  <circle id='circle8' class='circle8 steap' cx="34px" cy="49%" r="580"  />
+                  <circle id='circle9' class='circle9 steap' cx="34px" cy="49%" r="660"  />
+                </svg>
+                    <svg id='svg1' class='up2' xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <circle id='circle10' class='circle10 steap' cx="648px" cy="49%" r="20"  />
+                  <circle id='circle11' class='circle11 steap' cx="648px" cy="49%" r="100"  />
+                  <circle id='circle12' class='circle12 steap' cx="648px" cy="49%" r="180"  />
+                  <circle id='circle13' class='circle13 steap' cx="648px" cy="49%" r="260"  />
+                  <circle id='circle14' class='circle14 steap' cx="648px" cy="49%" r="340"  />
+                  <circle id='circle15' class='circle15 steap' cx="648px" cy="49%" r="420"  />
+                  <circle id='circle16' class='circle16 steap' cx="648px" cy="49%" r="500"  />
+                  <circle id='circle17' class='circle17 steap' cx="648px" cy="49%" r="580"  />
+                  <circle id='circle18' class='circle18 steap' cx="648px" cy="49%" r="660"  />
+                </svg>
+                    <div id='slide1' class='slide1 up1'>&nbsp 孔连顺：爱着水晶球的男孩，将来会...</div>
+                    <div id='slide2' class='slide2'>&nbsp 《龙马传》bilibili独家放送中！</div>
+                    <div id='slide3' class='slide3'>&nbsp LPL选手异闻录-Zz1tai篇：花的姿态</div>
+                    <div id='slide4' class='slide4'>&nbsp 2019 &nbsp bilibili &nbsp 国产动画冬季导视</div>
+                </div>
+          </div>
+        </div>
+      </div>
+      <!-- 右侧内容部分 -->
+      <div class="right-content">
+        <!-- 内容开始 -->
+        <div class="card">
+          <img src="src/img/win1.jpg" alt="图片">
+          <div class="card-mask">
+            <h5>up主：言力华</h5>
+            <div>【碧蓝航线】假面骑士名场景再现：救世主小龙人篇</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="src/img/win2.jpg" alt="图片">
+          <div class="card-mask">
+            <h5>up主：scyrax</h5>
+            <div>【年终盘点#4】盘点今年最棒的那些女子高中生们</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="src/img/win3.jpg" alt="图片">
+          <div class="card-mask">
+            <h5>up主：ilem</h5>
+            <div>【N奇方】用N种奇怪的方式打开GTA5第五弹</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="src/img/win4.jpg" alt="图片">
+          <div class="card-mask">
+            <h5>up主：动漫低手咸鱼</h5>
+            <div>B站最良心分享：毕业后最坑爹的几件事</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="src/img/win5.jpg" alt="图片">
+          <div class="card-mask">
+            <h5>up主：科学超电磁炮F</h5>
+            <div>【前方高能】一首起风了，日别2018</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="src/img/win6.jpg" alt="图片">
+          <div class="card-mask">
+            <h5>up主：ewwe124</h5>
+            <div>要怎样，要怎样才能找到那个和我共舞的你</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="src/img/win7.jpg" alt="图片">
+          <div class="card-mask">
+            <h5>up主：KBShinya</h5>
+            <div>【灵眸汉化组】幻想万华镜-试胆大会之章【前篇】</div>
+          </div>
+        </div>
+        <div class="card">
+          <img src="src/img/win8.jpg" alt="图片">
+          <div class="card-mask">
+            <h5>up主：泛式</h5>
+            <div>【赤九玖】Sweet Magic</div>
+          </div>
+        </div>
+        <!-- 内容结束 -->
+      </div>
+      <!-- hot结束 -->
+    </div>
+
+    <!-- 主页推广内容 -->
+    <div class="report clearfix scroll-content" id="promote">
+      <!-- 推广开始 -->
+      <div class="l-con">
+        <!-- 标题部分 -->
+        <div class="title clearfix">
+          <i class="icon i-promote float-l"></i>
+          <div class="text">推广</div>
+        </div>
+        <!-- 内容部分 -->
+        <div class="content clearfix">
+          <!-- 内动开始 -->
+          <div class="card card2">
+            <div class="img">
+              <img src="http://placehold.it/160x100" alt="图片">
+              <div class="card-mask">
+                <h5>震惊：死肥宅竟然。。。</h5>
+                <div>hi,thank you.</div>
+              </div>
+            </div>
+            <p>【音灵】在音游中玩自己唱的歌是种怎样的体验？</p>
+          </div>
+          <div class="card card2">
+            <div class="img">
+              <img src="http://placehold.it/160x100" alt="图片">
+              <div class="card-mask">
+                <h5>震惊：死肥宅竟然。。。</h5>
+                <div>hi,thank you.</div>
+              </div>
+            </div>
+            <p>【音灵】在音游中玩自己唱的歌是种怎样的体验？</p>
+          </div>
+          <div class="card card2">
+            <div class="img">
+              <img src="http://placehold.it/160x100" alt="图片">
+              <div class="card-mask">
+                <h5>震惊：死肥宅竟然。。。</h5>
+                <div>hi,thank you.</div>
+              </div>
+            </div>
+            <p>【音灵】在音游中玩自己唱的歌是种怎样的体验？</p>
+          </div>
+          <div class="card card2">
+            <div class="img">
+              <img src="http://placehold.it/160x100" alt="图片">
+              <div class="card-mask">
+                <h5>震惊：死肥宅竟然。。。</h5>
+                <div>hi,thank you.</div>
+              </div>
+            </div>
+            <p>【音灵】在音游中玩自己唱的歌是种怎样的体验？</p>
+          </div>
+          <div class="card card2">
+            <div class="img">
+              <img src="http://placehold.it/160x100" alt="图片">
+              <div class="card-mask">
+                <h5>震惊：死肥宅竟然。。。</h5>
+                <div>hi,thank you.</div>
+              </div>
+            </div>
+            <p>【音灵】在音游中玩自己唱的歌是种怎样的体验？</p>
+          </div>
+          <!-- 内容结束 -->
+        </div>
+      </div>
+      <div class="r-con">
+        <!-- 顶部展示框 -->
+        <div class="online">
+          <div class="item">
+            <a href="#">在线人数：34233</a>
+          </div>
+          <em></em>
+          <div class="item">
+            <a href="#">最新投稿：21202</a>
+          </div>
+        </div>
+        <!-- 下方图片 -->
+        <div class="pic">
+        </div>
+      </div>
+      <!-- 推广结束 -->
+    </div>
+
+    <!-- 中间网游广告 -->
+    <section class="ad-pic"></section>
+
+    <!-- 动画部分 -->
+    <section class="animation clearfix scroll-content" id="animate">
+      <div class="l-con">
+        <!-- 标题部分 -->
+        <div class="title clearfix">
+          <i class="icon i-animate float-l"></i>
+          <div class="text">动画</div>
+
+          <div class="tab tab1" id="ani-tab">
+            <div class="tab-item" data-tar="#new-motion">最新动态</div>
+            <div class="tab-item" data-tar="#new-submit">最新投稿</div>
+          </div>
+        </div>
+        <div class="content clearfix">
+          <div id="new-motion" class="tab-content">
+            <div class="row">
+              <!-- 第一行 -->
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>惊了，可还行！！</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>【全程高能/燃虐】你可曾有一个被触动的瞬间？游戏里最为凄美的爱情故事！</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>惊了，可还行！！</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>【全程高能/燃虐】你可曾有一个被触动的瞬间？游戏里最为凄美的爱情故事！</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>惊了，可还行！！</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>【全程高能/燃虐】你可曾有一个被触动的瞬间？游戏里最为凄美的爱情故事！</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>惊了，可还行！！</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>【全程高能/燃虐】你可曾有一个被触动的瞬间？游戏里最为凄美的爱情故事！</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>惊了，可还行！！</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>【全程高能/燃虐】你可曾有一个被触动的瞬间？游戏里最为凄美的爱情故事！</p>
+              </div>
+            </div>
+            <div class="row">
+              <!-- 第二行 -->
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>惊了，可还行！！</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>【全程高能/燃虐】你可曾有一个被触动的瞬间？游戏里最为凄美的爱情故事！</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>惊了，可还行！！</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>【全程高能/燃虐】你可曾有一个被触动的瞬间？游戏里最为凄美的爱情故事！</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>惊了，可还行！！</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>【全程高能/燃虐】你可曾有一个被触动的瞬间？游戏里最为凄美的爱情故事！</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>惊了，可还行！！</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>【全程高能/燃虐】你可曾有一个被触动的瞬间？游戏里最为凄美的爱情故事！</p>
+              </div>
+              <div class="card card2">
+                  <div class="img">
+                    <img src="http://placehold.it/160x100" alt="图片">
+                    <div class="card-mask">
+                      <h5>惊了，可还行！！</h5>
+                      <div>hellow word</div>
+                    </div>
+                  </div>
+                  <p>【全程高能/燃虐】你可曾有一个被触动的瞬间？游戏里最为凄美的爱情故事！</p>
+              </div>
+            </div>
+          </div>
+          <div id="new-submit" class="tab-content">
+            <div class="row clearfix">
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>【年终盘点】。。。</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>2018 年度最佳微单相机？索尼 A7M3</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>【年终盘点】。。。</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>2018 年度最佳微单相机？索尼 A7M3</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>【年终盘点】。。。</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>2018 年度最佳微单相机？索尼 A7M3</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>【年终盘点】。。。</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>2018 年度最佳微单相机？索尼 A7M3</p>
+              </div>
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>【年终盘点】。。。</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>2018 年度最佳微单相机？索尼 A7M3</p>
+              </div>
+            </div>
+            <div class="row clearfix">
+              <div class="card card2">
+                <div class="img">
+                  <img src="http://placehold.it/160x100" alt="图片">
+                  <div class="card-mask">
+                    <h5>【年终盘点】。。。</h5>
+                    <div>hellow word</div>
+                  </div>
+                </div>
+                <p>2018 年度最佳微单相机？索尼 A7M3</p>
+              </div>
+              加载完毕。
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="r-con">
+        <div class="rank-title clearfix">
+          <div class="text">排行</div>
+          <div id="ani-rank-tab" class="tab tab1">
+            <div class="tab-item" data-tar="#ani-ranklist1">全部</div>
+            <div class="tab-item" data-tar="#ani-ranklist2">原创</div>
+          </div>
+        </div>
+        <div>
+          <div class="tab-content" id="ani-ranklist1">
+            <div class="rank-list">
+              <div class="list-item">
+                <span class="rank rank-red">1</span>
+                <div class="rank-item-content clearfix">
+                  <div class="l-view">
+                    <img src="http://i1.hdslb.com/bfs/archive/eb6e23f6d92a683f9869954cefb2594900a7a8be.jpg@80w_50h.webp" alt="">
+                  </div>
+                  <div class="r-view">
+                    <p class="f-detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                  </div>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank rank-red">2</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank rank-red">3</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">4</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">5</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">6</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <a href="http://www.baidu.com" class="show-more" target="_blank">查看更多</a>
+            </div>
+          </div>
+          <div class="tab-content" id="ani-ranklist2">
+            <div class="rank-list">
+              <div class="list-item">
+                <span class="rank rank-red">1</span>
+                <div class="rank-item-content">
+                  <p class="detail">第二页排行榜</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 番剧 -->
+    <section class="animation clearfix scroll-content" id="fanju">
+      <div class="l-con">
+        <!-- 标题部分 -->
+        <div class="title clearfix">
+          <i class="icon i-fan float-l"></i>
+          <div class="text">番剧</div> 
+          <div class="tab tab2" id="fan-tab">
+            <div class="tab-item" data-tar="#fan-tab-1">最新</div>
+            <div class="tab-item" data-tar="#fan-tab-2" data-text="周一">一</div>
+            <div class="tab-item" data-tar="#fan-tab-3" data-text="周二">二</div>
+            <div class="tab-item" data-tar="#fan-tab-4" data-text="周三">三</div>
+            <div class="tab-item" data-tar="#fan-tab-5" data-text="周四">四</div>
+            <div class="tab-item" data-tar="#fan-tab-6" data-text="周五">五</div>
+            <div class="tab-item" data-tar="#fan-tab-7" data-text="周六">六</div>
+            <div class="tab-item" data-tar="#fan-tab-8" data-text="周日">日</div>
+          </div>
+        </div>
+        <div class="content clearfix">
+          <div id="fan-tab-1" class="tab-content card3-group clearfix">
+            <div class="card3">
+             <div class="l-con">
+               <img src="http://placehold.it/72x72" alt="">
+             </div>
+             <div class="r-con">
+               <div class="title">
+                黑色四叶草
+               </div>
+               <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+             </div>
+            </div>
+            <div class="card3">
+              <div class="l-con">
+                <img src="http://placehold.it/72x72" alt="">
+              </div>
+              <div class="r-con">
+                <div class="title">
+                 逆转裁判
+                </div>
+                <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+              </div>
+            </div>
+            <div class="card3">
+                <div class="l-con">
+                  <img src="http://placehold.it/72x72" alt="">
+                </div>
+                <div class="r-con">
+                  <div class="title">
+                   暖暖日记
+                  </div>
+                  <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                </div>
+            </div>
+            <div class="card3">
+                <div class="l-con">
+                  <img src="http://placehold.it/72x72" alt="">
+                </div>
+                <div class="r-con">
+                  <div class="title">
+                   JOJO的奇妙冒险
+                  </div>
+                  <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                </div>
+            </div>
+            <div class="card3">
+                <div class="l-con">
+                  <img src="http://placehold.it/72x72" alt="">
+                </div>
+                <div class="r-con">
+                  <div class="title">
+                   我家女仆有够烦
+                  </div>
+                  <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                </div>
+            </div>
+            <div class="card3">
+                <div class="l-con">
+                  <img src="http://placehold.it/72x72" alt="">
+                </div>
+                <div class="r-con">
+                  <div class="title">
+                   火之万相扑
+                  </div>
+                  <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                </div>
+            </div>
+            <div class="card3">
+                <div class="l-con">
+                  <img src="http://placehold.it/72x72" alt="">
+                </div>
+                <div class="r-con">
+                  <div class="title">
+                   前进球场
+                  </div>
+                  <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                </div>
+            </div>
+            <div class="card3">
+                <div class="l-con">
+                  <img src="http://placehold.it/72x72" alt="">
+                </div>
+                <div class="r-con">
+                  <div class="title">
+                   魔法禁书目录 第三季
+                  </div>
+                  <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                </div>
+            </div>
+            <div class="card3">
+                <div class="l-con">
+                  <img src="http://placehold.it/72x72" alt="">
+                </div>
+                <div class="r-con">
+                  <div class="title">
+                   黑色四叶草
+                  </div>
+                  <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                </div>
+            </div>
+            <div class="card3">
+                 <div class="l-con">
+                   <img src="http://placehold.it/72x72" alt="">
+                 </div>
+                 <div class="r-con">
+                   <div class="title">
+                    逆转裁判
+                   </div>
+                   <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                 </div>
+            </div>
+            <div class="card3">
+                   <div class="l-con">
+                     <img src="http://placehold.it/72x72" alt="">
+                   </div>
+                   <div class="r-con">
+                     <div class="title">
+                      暖暖日记
+                     </div>
+                     <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                   </div>
+            </div>
+            <div class="card3">
+                   <div class="l-con">
+                     <img src="http://placehold.it/72x72" alt="">
+                   </div>
+                   <div class="r-con">
+                     <div class="title">
+                      JOJO的奇妙冒险
+                     </div>
+                     <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                   </div>
+            </div>
+            <div class="card3">
+                   <div class="l-con">
+                     <img src="http://placehold.it/72x72" alt="">
+                   </div>
+                   <div class="r-con">
+                     <div class="title">
+                      我家女仆有够烦
+                     </div>
+                     <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                   </div>
+            </div>
+            <div class="card3">
+                   <div class="l-con">
+                     <img src="http://placehold.it/72x72" alt="">
+                   </div>
+                   <div class="r-con">
+                     <div class="title">
+                      火之万相扑
+                     </div>
+                     <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                   </div>
+            </div>
+            <div class="card3">
+                   <div class="l-con">
+                     <img src="http://placehold.it/72x72" alt="">
+                   </div>
+                   <div class="r-con">
+                     <div class="title">
+                      前进球场
+                     </div>
+                     <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                   </div>
+            </div>
+            <div class="card3">
+                   <div class="l-con">
+                     <img src="http://placehold.it/72x72" alt="">
+                   </div>
+                   <div class="r-con">
+                     <div class="title">
+                      魔法禁书目录 第三季
+                     </div>
+                     <div class="long"><span class="des">更新至</span><span class="size">12</span></div>
+                   </div>
+            </div>
+          </div>
+          <div id="fan-tab-2" class="tab-content clearfix card3-group">
+              <div class="card3">
+               <div class="l-con">
+                 <img src="http://placehold.it/72x72" alt="">
+               </div>
+               <div class="r-con">
+                 <div class="title">
+                  惊了
+                 </div>
+                 <div class="long"><span class="des">更新至</span><span class="size">24</span></div>
+               </div>
+              </div>
+          </div>
+          <div id="fan-tab-3" class="tab-content clearfix card3-group">
+            333
+          </div>
+          <div id="fan-tab-4" class="tab-content clearfix card3-group">
+            444
+          </div>
+          <div id="fan-tab-5" class="tab-content clearfix card3-group">
+            555
+          </div>
+          <div id="fan-tab-6" class="tab-content clearfix card3-group">
+            666
+          </div>
+          <div id="fan-tab-7" class="tab-content clearfix card3-group">
+            777
+          </div>
+          <div id="fan-tab-8" class="tab-content clearfix card3-group">
+            888
+          </div>
+        </div>
+      </div>
+      <div class="r-con">
+        <div class="rank-title clearfix">
+          <div class="text">排行</div>
+        </div>
+        <div>
+          <div >
+            <div class="rank-list">
+              <div class="list-item">
+                <span class="rank rank-red">1</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank rank-red">2</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank rank-red">3</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">4</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">5</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">6</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">7</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">8</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">9</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">10</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <div class="list-item">
+                <span class="rank">11</span>
+                <div class="rank-item-content">
+                  <p class="detail">【诚实吐槽】史上最脑残机战番，律师大战法师，反派死于吐血</p>
+                </div>
+              </div>
+              <a href="http://www.baidu.com" class="show-more" target="_blank">查看更多</a>
+            </div>
+          </div>
+        </div>
+      </div>
+  </section>
+
+  <!-- 地图 -->
+  <section class="bottom-pic">
+    
+  </section>
+  <script src="./src/component/tab.js"></script>
+  <script src="./src/component/casousel.js"></script>
+  <script src="./src/component/scroll-nav.js"></script>
+  <script src="./src/js/index.js"></script>
+  <script src="./src/js/ajax.js"></script>
+  <script src="./src/js/background.js"></script>
+</body>
+</html>
